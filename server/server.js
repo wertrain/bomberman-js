@@ -16,7 +16,7 @@
             console.log(msg);
         });
         socket.on('disconnect', function () {
-
+            
         });
     });
     
