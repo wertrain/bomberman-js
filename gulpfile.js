@@ -17,6 +17,7 @@ gulp.task('vender-js', function() {
 gulp.task('app-js', function() {
     return gulp.src([
         'client/js/common/common.js',
+        'client/js/scene/scenebase.js',
         'client/js/**/*.js'
       ])
       .pipe(concat('app.js'))
