@@ -1,24 +1,17 @@
 /**
- * @fileoverview すべてのシーンの基底となるクラスを定義。
+ * @fileoverview マップを表す
  */
 (function(namespace) {
     /**
-     * すべてのシーンの基底となるクラス
+     * マップを表すクラス
      * @constructor
      */
-    var SceneBase = enchant.Class.create({
+    var Map = enchant.Class.create({
         initialize: function() {
-            this.scene = new enchant.Scene();
-            //this.scene.backgroundColor = "#99FF99";
-        },
-        getEnchantScene: function() {
-            return this.scene;
-        },
-        addChild: function(object) {
-            this.scene.addChild(object);
+
         }
     });
     
     var ns = bomberman.common.addNamespace(namespace);
-    ns.SceneBase = SceneBase;
-}("bomberman.scene"));
+    ns.Map = Map;
+}("bomberman.game"));
