@@ -4,6 +4,7 @@
 (function(namespace) {
     /**
      * プレイヤークラス
+     * @constructor
      * @extends {bomberman.game.Chara} 
      */
     var Player = enchant.Class.create(bomberman.game.Chara, {

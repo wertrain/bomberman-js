@@ -5,7 +5,7 @@
     var express = require('express');
     var app = express();
     app.use(express.static(__dirname + '/build'));
-
+    
     var http = require('http');
     var server = http.createServer(app);
     var io = require('socket.io').listen(server);

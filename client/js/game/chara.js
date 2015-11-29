@@ -5,10 +5,11 @@
     /**
      * キャラクター基底クラス
      * @constructor
+     * @extends {enchant.Node} 
      */
-    var Chara = enchant.Class.create({
+    var Chara = enchant.Class.create(enchant.Node, {
         initialize: function() {
-
+            enchant.Node.call(this);
         },
     });
     

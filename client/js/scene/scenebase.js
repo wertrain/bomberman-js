@@ -9,7 +9,9 @@
     var SceneBase = enchant.Class.create({
         initialize: function() {
             this.scene = new enchant.Scene();
-            //this.scene.backgroundColor = "#99FF99";
+            // Chrome (Windows) で表示されない不具合の対策
+            // http://kazenetu.exblog.jp/15572197/
+            this.scene._element.style.overflow = 'visible';
         },
         getEnchantScene: function() {
             return this.scene;
