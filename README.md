@@ -12,7 +12,7 @@
 
 [enchant.js](http://enchantjs.com/) download and then put it in this directory.
 
-* chat-rpg-js/client/libs/enchantjs/enchant.js
+* bomberman-js/client/libs/enchantjs/enchant.js
 
 Install plugins
 
