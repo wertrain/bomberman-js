@@ -10,14 +10,17 @@
         initialize: function() {
             bomberman.scene.SceneBase.call(this);
             var game = enchant.Game.instance;
-            var map = new bomberman.game.Map(game.assets[R.CHIP], 24, 24);
-
+            var map = new bomberman.game.Map(game.assets[R.CHIP], 16, 16);
+            var player = new bomberman.game.Player(16, 24);
+            player.setImage(game.assets[R.WHITE_BOMBERMAN], 48, 168);
+            
             var stage = new enchant.Group();
             stage.addChild(map.getEnchantMap());
+            stage.addChild(player);
             this.getEnchantScene().addChild(stage);
              
             this.getEnchantScene().addEventListener(enchant.Event.ENTER_FRAME, function(e) {
-                
+                player.enterFrame(map.getEnchantMap());
             });
         }
     });
@@ -30,7 +33,8 @@
     var R = BattleScene.Resources = {
         ITEM: 'images/item24.png',
         BOMB: 'images/bomb24.png',
-        CHIP: 'images/chip24.png',
+        CHIP: 'images/chip16.png',
+        WHITE_BOMBERMAN: 'images/white16.png',
     };
     
     var ns = bomberman.common.addNamespace(namespace);
