@@ -12,6 +12,7 @@
             var game = enchant.Game.instance;
             var map = new bomberman.game.Map(game.assets[R.CHIP], 16, 16);
             var player = new bomberman.game.Player(16, 24);
+            player.setPos(1, 1);
             player.setImage(game.assets[R.WHITE_BOMBERMAN], 48, 168);
             
             var stage = new enchant.Group();
