@@ -3,6 +3,11 @@
  */
 (function(global, namespace) {
     /**
+     * 定数定義
+     */ 
+    var CHIP_SIZE = 16;
+
+    /**
      * ドットで区切られた文字列を展開し、グローバル領域に定義していきます。
      * @param {string} str 名前空間用の文字列。
      * @return {object} 最後に定義されたオブジェクト。
@@ -35,4 +40,5 @@
     var ns = addNamespace(namespace);
     ns.addNamespace = addNamespace;
     ns.addResourceArray = addResourceArray;
+    ns.CHIP_SIZE = CHIP_SIZE;
 }(this, "bomberman.common"));

@@ -12,8 +12,8 @@
             bomberman.game.Chara.call(this);
             
             this.sprite = new enchant.Sprite(width, height);
-            this.sprite.x = 16;
-            this.sprite.y = 8;
+            this.sprite.x = 0;
+            this.sprite.y = 0;
             this.sprite.isMoving = false;
             this.sprite.direction = 1;
             this.sprite.walk = 1;
@@ -30,7 +30,8 @@
                         this.walk++;
                         this.walk %= 3;
                     }
-                    if ((this.vx && this.x % 16 == 0) || (this.vy && (this.y-8) % 16 == 0)) {
+                    if ((this.vx && this.x % bomberman.common.CHIP_SIZE == 0) || 
+                        (this.vy && (this.y-8) % bomberman.common.CHIP_SIZE == 0)) {
                         this.isMoving = false;
                     }
                     return true;
@@ -52,8 +53,8 @@
                         this.walk = 1;
                     }
                     if (this.vx || this.vy) {
-                        var x = this.x + (this.vx ? this.vx / Math.abs(this.vx) * 16 : 0) + 8;
-                        var y = this.y + (this.vy ? this.vy / Math.abs(this.vy) * 16 : 0) + 8;
+                        var x = this.x + (this.vx ? this.vx / Math.abs(this.vx) * bomberman.common.CHIP_SIZE : 0) + 8;
+                        var y = this.y + (this.vy ? this.vy / Math.abs(this.vy) * bomberman.common.CHIP_SIZE : 0) + 8;
                         if (0 <= x && x < map.width && 0 <= y && y < map.height && !map.hitTest(x, y)) {
                             this.isMoving = true;
                             arguments.callee.call(this);
@@ -63,14 +64,20 @@
                 return false;
             };
         },
-        setImage: function(assets, imageWidth, imageHeight) {
+        setImage: function(asset, imageWidth, imageHeight) {
             this.image = new enchant.Surface(imageWidth, imageHeight);
-            this.image.draw(assets, 0, 0, imageWidth, imageHeight, 0, 0, imageWidth, imageHeight);
+            this.image.draw(asset, 0, 0, imageWidth, imageHeight, 0, 0, imageWidth, imageHeight);
             this.sprite.image = this.image;
         },
-        setPos: function(x, y) {
-            this.sprite.x = x * 16;
-            this.sprite.y = y * 16 - 8;
+        setMapPos: function(x, y) {
+            this.sprite.x = x * bomberman.common.CHIP_SIZE;
+            this.sprite.y = y * bomberman.common.CHIP_SIZE - 8;
+        },
+        getMapPosX: function() {
+            return this.sprite.x / bomberman.common.CHIP_SIZE;
+        },
+        getMapPosY: function() {
+            return this.sprite.y / bomberman.common.CHIP_SIZE;
         },
         enterFrame: function(map) {
             return this.sprite.enterFrame(map);

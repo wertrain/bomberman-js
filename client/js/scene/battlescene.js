@@ -10,18 +10,33 @@
         initialize: function() {
             bomberman.scene.SceneBase.call(this);
             var game = enchant.Game.instance;
-            var map = new bomberman.game.Map(game.assets[R.CHIP], 16, 16);
-            var player = new bomberman.game.Player(16, 24);
-            player.setPos(1, 1);
-            player.setImage(game.assets[R.WHITE_BOMBERMAN], 48, 168);
+            game.keybind(90, 'a'); // Zキー = Aボタン
             
+            var CHIP_SIZE = bomberman.common.CHIP_SIZE;
+            var map = new bomberman.game.Map(game.assets[R.CHIP], CHIP_SIZE, CHIP_SIZE);
+            var player = new bomberman.game.Player(16, 24);
+            player.setMapPos(1, 1);
+            player.setImage(game.assets[R.WHITE_BOMBERMAN], 48, 168);
+            var bombGroup = new enchant.Group();
             var stage = new enchant.Group();
             stage.addChild(map.getEnchantMap());
+            stage.addChild(bombGroup);
             stage.addChild(player);
             this.getEnchantScene().addChild(stage);
-             
+            
+            var buttonTrigger = false;
             this.getEnchantScene().addEventListener(enchant.Event.ENTER_FRAME, function(e) {
                 player.enterFrame(map.getEnchantMap());
+                if (game.input.a) {
+                    if (false === buttonTrigger) {
+                        var bomb = new bomberman.game.NormalBomb(game.assets[R.BOMB], CHIP_SIZE, CHIP_SIZE, 48, 16);
+                        bomb.put(player.getMapPosX(), player.getMapPosY());
+                        bombGroup.addChild(bomb);
+                    }
+                    buttonTrigger = true;
+                } else {
+                    buttonTrigger = false;
+                }
             });
         }
     });
@@ -33,7 +48,7 @@
      */
     var R = BattleScene.Resources = {
         ITEM: 'images/item24.png',
-        BOMB: 'images/bomb24.png',
+        BOMB: 'images/bomb16.png',
         CHIP: 'images/chip16.png',
         WHITE_BOMBERMAN: 'images/white16.png',
     };
