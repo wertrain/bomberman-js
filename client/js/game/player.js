@@ -8,17 +8,13 @@
      * @extends {bomberman.game.Chara} 
      */
     var Player = enchant.Class.create(bomberman.game.Chara, {
-        initialize: function(width, height) {
-            bomberman.game.Chara.call(this);
-            
-            this.sprite = new enchant.Sprite(width, height);
-            this.sprite.x = 0;
-            this.sprite.y = 0;
+        initialize: function(asset, chipWidth, chipHeight, imageWidth, imageHeight) {
+            bomberman.game.Chara.call(this, asset, chipWidth, chipHeight, imageWidth, imageHeight);
+
             this.sprite.isMoving = false;
             this.sprite.direction = 1;
             this.sprite.walk = 1;
-            this.image = null;
-            this.addChild(this.sprite);
+            this.sprite.frame = this.sprite.direction * 3 + 1;
             
             this.sprite.enterFrame = function(map) {
                 var game = enchant.Game.instance;
@@ -63,15 +59,6 @@
                 }
                 return false;
             };
-        },
-        setImage: function(asset, imageWidth, imageHeight) {
-            this.image = new enchant.Surface(imageWidth, imageHeight);
-            this.image.draw(asset, 0, 0, imageWidth, imageHeight, 0, 0, imageWidth, imageHeight);
-            this.sprite.image = this.image;
-        },
-        setMapPos: function(x, y) {
-            this.sprite.x = x * bomberman.common.CHIP_SIZE;
-            this.sprite.y = y * bomberman.common.CHIP_SIZE - 8;
         },
         getMapPosX: function() {
             return this.sprite.x / bomberman.common.CHIP_SIZE;

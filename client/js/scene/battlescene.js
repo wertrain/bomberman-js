@@ -14,9 +14,9 @@
             
             var CHIP_SIZE = bomberman.common.CHIP_SIZE;
             var map = new bomberman.game.Map(game.assets[R.CHIP], CHIP_SIZE, CHIP_SIZE);
-            var player = new bomberman.game.Player(16, 24);
-            player.setMapPos(1, 1);
-            player.setImage(game.assets[R.WHITE_BOMBERMAN], 48, 168);
+            var player = new bomberman.game.Player(game.assets[R.WHITE_BOMBERMAN], 16, 24, 48, 128);
+            player.put(1, 1);
+            
             var bombGroup = new enchant.Group();
             var stage = new enchant.Group();
             stage.addChild(map.getEnchantMap());
