@@ -8,14 +8,14 @@
      * @extends {enchant.Group} 
      */
     var Drawable = enchant.Class.create(enchant.Group, {
-        initialize: function(asset, chipWidth, chipHeight, imageWidth, imageHeight) {
+        initialize: function(asset, chipX, chipY, chipWidth, chipHeight, imageWidth, imageHeight) {
             enchant.Group.call(this);
             this.sprite = new enchant.Sprite(chipWidth, chipHeight);
             this.image = new enchant.Surface(imageWidth, imageHeight);
-            this.image.draw(asset, 0, 0, imageWidth, imageHeight, 0, 0, imageWidth, imageHeight);
+            this.image.draw(asset, chipX, chipY, imageWidth, imageHeight, 0, 0, imageWidth, imageHeight);
             this.sprite.image = this.image;
             this.sprite.frame = 0;
-        },
+        }
     });
     
     var ns = bomberman.common.addNamespace(namespace);

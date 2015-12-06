@@ -4,6 +4,7 @@
 (function(namespace) {
     /**
      * 戦闘画面のクラス
+     * @constructor
      * @extends {bomberman.scene.SceneBase} 
      */
     var BattleScene = enchant.Class.create(bomberman.scene.SceneBase, {
@@ -13,9 +14,12 @@
             game.keybind(90, 'a'); // Zキー = Aボタン
             
             var CHIP_SIZE = bomberman.common.CHIP_SIZE;
+            
             var map = new bomberman.game.Map(game.assets[R.CHIP], CHIP_SIZE, CHIP_SIZE);
             var player = new bomberman.game.Player(game.assets[R.WHITE_BOMBERMAN], 16, 24, 48, 128);
             player.put(1, 1);
+            var blast = new bomberman.game.Blast(game.assets[R.BOMB], CHIP_SIZE, CHIP_SIZE, 48, 16);
+            blast.blast(1, 2);
             
             var bombGroup = new enchant.Group();
             var stage = new enchant.Group();
