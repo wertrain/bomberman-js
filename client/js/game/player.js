@@ -61,10 +61,10 @@
             };
         },
         getMapPosX: function() {
-            return this.sprite.x / bomberman.common.CHIP_SIZE;
+            return Math.floor(this.sprite.x / bomberman.common.CHIP_SIZE);
         },
         getMapPosY: function() {
-            return this.sprite.y / bomberman.common.CHIP_SIZE;
+            return Math.floor((this.sprite.y + 8) / bomberman.common.CHIP_SIZE);
         },
         enterFrame: function(map) {
             return this.sprite.enterFrame(map);
