@@ -18,15 +18,19 @@
             var map = new bomberman.game.Map(game.assets[R.CHIP], CHIP_SIZE, CHIP_SIZE);
             var player = new bomberman.game.Player(game.assets[R.WHITE_BOMBERMAN], 16, 24, 48, 128);
             player.put(1, 1);
-            var blast = new bomberman.game.Blast(game.assets[R.BOMB], CHIP_SIZE, CHIP_SIZE, 48, 16);
+            var blast = new bomberman.game.Blast(game.assets[R.BOMB], CHIP_SIZE, CHIP_SIZE, 128, 128);
             blast.blast(1, 2);
             
             var bombGroup = new enchant.Group();
+            var blastGroup = new enchant.Group();
             var stage = new enchant.Group();
             stage.addChild(map.getEnchantMap());
             stage.addChild(bombGroup);
             stage.addChild(player);
+            stage.addChild(blastGroup);
             this.getEnchantScene().addChild(stage);
+            
+            blastGroup.addChild(blast);
             
             var buttonTrigger = false;
             this.getEnchantScene().addEventListener(enchant.Event.ENTER_FRAME, function(e) {
