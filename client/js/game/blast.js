@@ -14,16 +14,11 @@
             this.blastCenterY = 0;
             this.power = 0;
             this.sprite.frame = [8, 16, 24, 32, 40];
-            
-            this.spriteTop = new enchant.Sprite(chipWidth, chipHeight);
-            this.spriteTop.image = this.image;
-            this.spriteTop.frame = [8, 16, 24, 32, 40];
-            this.addChild(this.spriteTop);
         },
         put: function(x, y) {
             this.sprite.x = x * bomberman.common.CHIP_SIZE;
             this.sprite.y = y * bomberman.common.CHIP_SIZE + 8;
-            this.addChild(this.sprite);
+            //this.addChild(this.sprite);
         },
         blast: function(x, y, power) {
             this.blastCenterX = x;
