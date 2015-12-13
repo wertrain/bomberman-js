@@ -19,7 +19,7 @@
             var player = new bomberman.game.Player(game.assets[R.WHITE_BOMBERMAN], 16, 24, 48, 128);
             player.put(1, 1);
             var blast = new bomberman.game.Blast(game.assets[R.BOMB], CHIP_SIZE, CHIP_SIZE, 128, 128);
-            blast.blast(1, 2);
+            blast.blast(4, 4);
             
             var bombGroup = new enchant.Group();
             var blastGroup = new enchant.Group();

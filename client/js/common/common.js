@@ -6,6 +6,7 @@
      * 定数定義
      */ 
     var CHIP_SIZE = 16;
+    var MAX_BLAST_POWER = 9;
 
     /**
      * ドットで区切られた文字列を展開し、グローバル領域に定義していきます。
@@ -41,4 +42,5 @@
     ns.addNamespace = addNamespace;
     ns.addResourceArray = addResourceArray;
     ns.CHIP_SIZE = CHIP_SIZE;
+    ns.MAX_BLAST_POWER = MAX_BLAST_POWER;
 }(this, "bomberman.common"));
