@@ -12,8 +12,8 @@
             bomberman.system.Drawable.call(this, asset, 0, 0, chipWidth, chipHeight, imageWidth, imageHeight);
             this.blastCenterX = 0;
             this.blastCenterY = 0;
-            this.power = 0;
-            this.sprite.frame = [14, 22, 30, 38, 46, 38, 20, 22, 14, null];
+            this.power = 3;
+            this.sprite.frame = [14, 22, 30, 38, 46, 38, 30, 22, 14, null];
             var that = this;
             this.sprite.addEventListener(enchant.Event.ANIMATION_END, function(e) {
                 var clength = that.childNodes.length;
@@ -24,7 +24,7 @@
             this.spriteList = []
             for (var i = 0; i < 4; ++i) {
                 this.spriteList[i] = [];
-                 for (var j = 0; j < bomberman.common.MAX_BLAST_POWER; ++j) {
+                for (var j = 0; j < bomberman.common.MAX_BLAST_POWER; ++j) {
                     var tmp = new enchant.Sprite(chipWidth, chipHeight);
                     tmp.image = this.image;
                     tmp.x = j * bomberman.common.CHIP_SIZE;
@@ -37,11 +37,12 @@
             this.sprite.x = x * bomberman.common.CHIP_SIZE;
             this.sprite.y = y * bomberman.common.CHIP_SIZE;
             this.addChild(this.sprite);
+            this.power = 3;
             for (var i = 0; i < 4; ++i) {
                  for (var j = 0; j < this.power; ++j) {
                      var dx = 0, dy = 0;
                      var frame = null, offset = 1;
-                     switch(i){
+                     switch(i) {
                          case 0:
                             dx = this.sprite.x;
                             dy = this.sprite.y - ((j + 1) * bomberman.common.CHIP_SIZE);
