@@ -18,8 +18,6 @@
             var map = new bomberman.game.Map(game.assets[R.CHIP], CHIP_SIZE, CHIP_SIZE);
             var player = new bomberman.game.Player(game.assets[R.WHITE_BOMBERMAN], 16, 24, 48, 128);
             player.put(1, 1);
-            var blast = new bomberman.game.Blast(game.assets[R.BOMB], CHIP_SIZE, CHIP_SIZE, 128, 128);
-            blast.blast(4, 4);
             
             var bombGroup = new enchant.Group();
             var blastGroup = new enchant.Group();
@@ -30,16 +28,26 @@
             stage.addChild(blastGroup);
             this.getEnchantScene().addChild(stage);
             
-            blastGroup.addChild(blast);
+            
             
             var buttonTrigger = false;
             this.getEnchantScene().addEventListener(enchant.Event.ENTER_FRAME, function(e) {
                 player.enterFrame(map.getEnchantMap());
                 if (game.input.a) {
                     if (false === buttonTrigger) {
+                        var x = player.getMapPosX(), y = player.getMapPosY();
                         var bomb = new bomberman.game.NormalBomb(game.assets[R.BOMB], CHIP_SIZE, CHIP_SIZE, 48, 16);
-                        bomb.put(player.getMapPosX(), player.getMapPosY());
+                        bomb.put(x, y);
                         bombGroup.addChild(bomb);
+                        var blast = new bomberman.game.Blast(game.assets[R.BOMB], CHIP_SIZE, CHIP_SIZE, 128, 128);
+                        blastGroup.addChild(blast);
+
+                        setInterval(function() {
+                            bombGroup.removeChild(bomb);
+                            blast.blast(x, y, 2, function() {
+                                blastGroup.removeChild(blast);
+                            });
+                        }, 3000);
                     }
                     buttonTrigger = true;
                 } else {

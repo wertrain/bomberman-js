@@ -13,6 +13,7 @@
             this.blastCenterX = 0;
             this.blastCenterY = 0;
             this.power = 3;
+            this.callback = null;
             this.sprite.frame = [14, 22, 30, 38, 46, 38, 30, 22, 14, null];
             var that = this;
             this.sprite.addEventListener(enchant.Event.ANIMATION_END, function(e) {
@@ -20,6 +21,7 @@
                 for (var i = 0; i < clength; ++i) {
                     that.removeChild(that.childNodes[0]);
                 }
+                that.callback();
             });
             this.spriteList = []
             for (var i = 0; i < 4; ++i) {
@@ -37,7 +39,6 @@
             this.sprite.x = x * bomberman.common.CHIP_SIZE;
             this.sprite.y = y * bomberman.common.CHIP_SIZE;
             this.addChild(this.sprite);
-            this.power = 3;
             for (var i = 0; i < 4; ++i) {
                  for (var j = 0; j < this.power; ++j) {
                      var dx = 0, dy = 0;
@@ -72,10 +73,11 @@
             }
 
         },
-        blast: function(x, y, power) {
+        blast: function(x, y, power, callback) {
             this.blastCenterX = x;
             this.blastCenterY = y;
             this.power = power;
+            this.callback = callback;
             this.put(x, y);
         },
         enterFrame: function(map) {
