@@ -28,8 +28,6 @@
             stage.addChild(blastGroup);
             this.getEnchantScene().addChild(stage);
             
-            
-            
             var buttonTrigger = false;
             this.getEnchantScene().addEventListener(enchant.Event.ENTER_FRAME, function(e) {
                 player.enterFrame(map.getEnchantMap());
