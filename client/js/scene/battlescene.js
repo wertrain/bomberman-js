@@ -24,8 +24,8 @@
             var stage = new enchant.Group();
             stage.addChild(map.getEnchantMap());
             stage.addChild(bombGroup);
-            stage.addChild(player);
             stage.addChild(blastGroup);
+            stage.addChild(player);
             this.getEnchantScene().addChild(stage);
             
             var buttonTrigger = false;

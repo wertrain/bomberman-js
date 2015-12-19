@@ -5,6 +5,7 @@ var gulp = require('gulp'),
 gulp.task('copy', function() {
     gulp.src('client/*.html').pipe(gulp.dest('server/build'));
     gulp.src('client/images/**/*.*').pipe(gulp.dest('server/build/images'));
+    gulp.src('client/js/network/constants.js').pipe(gulp.dest('server/'));
 });
 
 gulp.task('vender-js', function() {
@@ -17,6 +18,7 @@ gulp.task('vender-js', function() {
 gulp.task('app-js', function() {
     return gulp.src([
         'client/js/common/common.js',
+        'client/js/network/constants.js',
         'client/js/scene/scenebase.js',
         'client/js/system/drawable.js',
         'client/js/game/chara.js',

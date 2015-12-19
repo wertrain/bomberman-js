@@ -12,7 +12,7 @@ window.onload = function() {
     game.onload = function() {
         var battleScene = new bomberman.scene.BattleScene();
         game.pushScene(battleScene.getEnchantScene());
-        bomberman.network.login('test');
+        bomberman.network.login('player');
     };
     game.start();
 };

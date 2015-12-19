@@ -6,11 +6,11 @@
     //var port = 8080;
     //var socketio = io.connect('/', { port: port });
     
-    socketio.on('connected', function(player) {
+    socketio.on(Constants.EVENT_CONNECTED, function(player) {
 
     });
     var login = function(name) {
-        socketio.emit('connected', name);
+        socketio.emit(Constants.EVENT_CONNECTED, name);
     }
     var ns = bomberman.common.addNamespace(namespace);
     ns.login = login;

@@ -9,13 +9,14 @@
     var http = require('http');
     var server = http.createServer(app);
     var io = require('socket.io').listen(server);
+    var constants = require('./constants.js').Constants;
 
     io.sockets.on('connection', function (socket) {
-        socket.on('connected', function () {
+        socket.on(constants.EVENT_CONNECTED, function () {
             var msg = '(' + socket.id + ')' + 'が入室しました ';
             console.log(msg);
         });
-        socket.on('disconnect', function () {
+        socket.on(constants.EVENT_DISCONNECTED, function () {
             
         });
     });
