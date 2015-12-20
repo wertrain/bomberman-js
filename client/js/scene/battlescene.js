@@ -29,7 +29,6 @@
             this.getEnchantScene().addChild(stage);
                       
             bomberman.network.setEventCallback(Constants.EVENT_BOMB, function(param) {
-                console.log("callback");
                 var bomb = new bomberman.game.NormalBomb(game.assets[R.BOMB], CHIP_SIZE, CHIP_SIZE, 48, 16);
                 bomb.put(param.x, param.y);
                 bombGroup.addChild(bomb);
