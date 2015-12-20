@@ -15,6 +15,7 @@
             this.sprite.direction = 1;
             this.sprite.walk = 1;
             this.sprite.frame = this.sprite.direction * 3 + 1;
+            this.power = 2;
             
             this.sprite.enterFrame = function(map) {
                 var game = enchant.Game.instance;
@@ -69,6 +70,9 @@
         enterFrame: function(map) {
             return this.sprite.enterFrame(map);
         },
+        getPower: function() {
+            return this.power;
+        }
     });
     
     var ns = bomberman.common.addNamespace(namespace);

@@ -27,25 +27,32 @@
             stage.addChild(blastGroup);
             stage.addChild(player);
             this.getEnchantScene().addChild(stage);
-            
+                      
+            bomberman.network.setEventCallback(Constants.EVENT_BOMB, function(param) {
+                console.log("callback");
+                var bomb = new bomberman.game.NormalBomb(game.assets[R.BOMB], CHIP_SIZE, CHIP_SIZE, 48, 16);
+                bomb.put(param.x, param.y);
+                bombGroup.addChild(bomb);
+                var blast = new bomberman.game.Blast(game.assets[R.BOMB], CHIP_SIZE, CHIP_SIZE, 128, 128);
+                blastGroup.addChild(blast);
+                setInterval(function() {
+                    bombGroup.removeChild(bomb);
+                    blast.blast(param.x, param.y, param.power, function() {
+                        blastGroup.removeChild(blast);
+                    });
+                }, 3000);
+            });
+                        
             var buttonTrigger = false;
             this.getEnchantScene().addEventListener(enchant.Event.ENTER_FRAME, function(e) {
                 player.enterFrame(map.getEnchantMap());
                 if (game.input.a) {
                     if (false === buttonTrigger) {
-                        var x = player.getMapPosX(), y = player.getMapPosY();
-                        var bomb = new bomberman.game.NormalBomb(game.assets[R.BOMB], CHIP_SIZE, CHIP_SIZE, 48, 16);
-                        bomb.put(x, y);
-                        bombGroup.addChild(bomb);
-                        var blast = new bomberman.game.Blast(game.assets[R.BOMB], CHIP_SIZE, CHIP_SIZE, 128, 128);
-                        blastGroup.addChild(blast);
-
-                        setInterval(function() {
-                            bombGroup.removeChild(bomb);
-                            blast.blast(x, y, 2, function() {
-                                blastGroup.removeChild(blast);
-                            });
-                        }, 3000);
+                        bomberman.network.sendEvent(Constants.EVENT_BOMB, {
+                            x: player.getMapPosX(), 
+                            y: player.getMapPosY(), 
+                            power: player.getPower()
+                        });
                     }
                     buttonTrigger = true;
                 } else {
