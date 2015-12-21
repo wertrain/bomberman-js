@@ -24,6 +24,11 @@
             socket.broadcast.emit(constants.EVENT_BOMB, param);
             socket.emit(constants.EVENT_BOMB, param);
         });
+        socket.on(constants.EVENT_PLAYER, function (param) {
+            param.id = socket.id;
+            socket.broadcast.emit(constants.EVENT_PLAYER, param);
+            //console.log(param);
+        });
     });
     
     server.listen(process.env.PORT || 8080);

@@ -45,6 +45,11 @@
             var buttonTrigger = false;
             this.getEnchantScene().addEventListener(enchant.Event.ENTER_FRAME, function(e) {
                 player.enterFrame(map.getEnchantMap());
+                bomberman.network.sendEvent(Constants.EVENT_PLAYER, {
+                    x: player.getPosX(), 
+                    y: player.getPosY(),
+                    frame: player.getAnimFrame()
+                });
                 if (game.input.a) {
                     if (false === buttonTrigger) {
                         bomberman.network.sendEvent(Constants.EVENT_BOMB, {

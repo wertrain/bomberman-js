@@ -61,6 +61,15 @@
                 return false;
             };
         },
+        getPosX: function() {
+            return this.sprite.x;
+        },
+        getPosY: function() {
+            return this.sprite.y;
+        },
+        getAnimFrame: function() {
+            return this.sprite.frame;
+        },
         getMapPosX: function() {
             return Math.floor(this.sprite.x / bomberman.common.CHIP_SIZE);
         },
