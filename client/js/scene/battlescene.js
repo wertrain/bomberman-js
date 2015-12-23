@@ -15,17 +15,22 @@
             
             var CHIP_SIZE = bomberman.common.CHIP_SIZE;
             
+            var bombGroup = new enchant.Group();
+            var blastGroup = new enchant.Group();
+            var playerGroup = new enchant.Group();
+                        
             var map = new bomberman.game.Map(game.assets[R.CHIP], CHIP_SIZE, CHIP_SIZE);
             var player = new bomberman.game.Player(game.assets[R.WHITE_BOMBERMAN], 16, 24, 48, 128);
             player.put(1, 1);
+            playerGroup.addChild(player);
             
-            var bombGroup = new enchant.Group();
-            var blastGroup = new enchant.Group();
+            var otherPlayers = [];
+            
             var stage = new enchant.Group();
             stage.addChild(map.getEnchantMap());
             stage.addChild(bombGroup);
             stage.addChild(blastGroup);
-            stage.addChild(player);
+            stage.addChild(playerGroup);
             this.getEnchantScene().addChild(stage);
                       
             bomberman.network.setEventCallback(Constants.EVENT_BOMB, function(param) {
@@ -41,7 +46,30 @@
                     });
                 }, 3000);
             });
-                        
+            
+            bomberman.network.setEventCallback(Constants.EVENT_JOIN, function(param) {
+                var newPlayer = new bomberman.game.Player(game.assets[R.WHITE_BOMBERMAN], 16, 24, 48, 128);
+                newPlayer.put(1, 1);
+                playerGroup.addChild(newPlayer);
+                otherPlayers[param.id] = newPlayer;
+                console.log('join: ' + param.id);
+            });
+            
+            bomberman.network.setEventCallback(Constants.EVENT_LEAVE, function(param) {
+                var leavePlayer = otherPlayers[param.id];
+                if (leavePlayer !== null || typeof leavePlayer !== 'undefined') {
+                    delete otherPlayers[param.id];
+                    playerGroup.removeChild(leavePlayer);
+                }
+            });
+            
+            bomberman.network.setEventCallback(Constants.EVENT_PLAYER, function(param) {
+                var activePlayer = otherPlayers[param.id];
+                if (activePlayer !== null || typeof activePlayer !== 'undefined') {
+                    activePlayer.setInfo(param);
+                }
+            });
+            
             var buttonTrigger = false;
             this.getEnchantScene().addEventListener(enchant.Event.ENTER_FRAME, function(e) {
                 player.enterFrame(map.getEnchantMap());
@@ -62,6 +90,10 @@
                 } else {
                     buttonTrigger = false;
                 }
+                // 常に y 座標でソートしておく
+                playerGroup.childNodes.sort(function(_o0,_o1) {
+                    return (_o0.sprite.y > _o1.sprite.y) ? 1 : ((_o0.sprite.y < _o1.sprite.y) ? -1 : 0);
+                });
             });
         }
     });

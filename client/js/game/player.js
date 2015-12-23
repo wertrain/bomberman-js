@@ -61,6 +61,11 @@
                 return false;
             };
         },
+        setInfo: function(param) {
+            this.sprite.x = param.x;
+            this.sprite.y = param.y;
+            this.sprite.frame = param.frame;
+        },
         getPosX: function() {
             return this.sprite.x;
         },

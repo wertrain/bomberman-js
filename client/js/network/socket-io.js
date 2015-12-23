@@ -8,15 +8,22 @@
     
     // if 判定が不要なようにすべてのコールバックを埋めておく
     var events = [];
-    for(var prop in Constants) {
-         events[prop] = function(param) {};
+    // 以下のようなイベントごとの定義が不要なようにラッパーを作って
+    // ループで設定しておく
+    //socketio.on(Constants.EVENT_CONNECTED, function(param) {
+    //    events[Constants.EVENT_CONNECTED](param);
+    //});
+    function SocketIoEventWrapper(index) {
+        this.callback = function(param) {
+            events[index](param);
+        }
     }
-    socketio.on(Constants.EVENT_CONNECTED, function(player) {
-        events[Constants.EVENT_CONNECTED](player);
-    });
-    socketio.on(Constants.EVENT_BOMB, function(param) {
-        events[Constants.EVENT_BOMB](param);
-    });
+    for(var prop in Constants) {
+        events[Constants[prop]] = function(param) {};
+        var wrapper = new SocketIoEventWrapper(Constants[prop]);
+        socketio.on(Constants[prop], wrapper.callback);
+    }
+    
     var login = function(name) {
         socketio.emit(Constants.EVENT_CONNECTED, name);
     }
