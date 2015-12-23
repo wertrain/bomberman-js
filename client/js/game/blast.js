@@ -35,12 +35,13 @@
                 }
             }
         },
-        put: function(x, y) {
+        put: function(x, y, map) {
             this.sprite.x = x * bomberman.common.CHIP_SIZE;
             this.sprite.y = y * bomberman.common.CHIP_SIZE;
             this.addChild(this.sprite);
             for (var i = 0; i < 4; ++i) {
-                 for (var j = 0; j < this.power; ++j) {
+                var skip = false;
+                for (var j = 0; j < this.power; ++j) {
                      var dx = 0, dy = 0;
                      var frame = null, offset = 1;
                      switch(i) {
@@ -65,6 +66,7 @@
                             offset = (j === this.power - 1) ? 3 : 4;
                          break;
                      }
+                     if (skip || (skip = map.hitTest(dx, dy))) continue;
                      this.spriteList[i][j].x = dx;
                      this.spriteList[i][j].y = dy;
                      this.spriteList[i][j].frame = [8 + offset, 16 + offset, 24 + offset, 32 + offset, 40 + offset, 32 + offset, 24 + offset, 16 + offset, 8 + offset, null];
@@ -73,12 +75,12 @@
             }
 
         },
-        blast: function(x, y, power, callback) {
+        blast: function(x, y, power, map, callback) {
             this.blastCenterX = x;
             this.blastCenterY = y;
             this.power = power;
             this.callback = callback;
-            this.put(x, y);
+            this.put(x, y, map);
         },
         enterFrame: function(map) {
             this.image.draw(asset, chipX, chipY, imageWidth, imageHeight, 0, 0, imageWidth, imageHeight);

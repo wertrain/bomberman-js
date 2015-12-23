@@ -39,10 +39,11 @@
                 bombGroup.addChild(bomb);
                 var blast = new bomberman.game.Blast(game.assets[R.BOMB], CHIP_SIZE, CHIP_SIZE, 128, 128);
                 blastGroup.addChild(blast);
-                setInterval(function() {
+                var timerId = setInterval(function() {
                     bombGroup.removeChild(bomb);
-                    blast.blast(param.x, param.y, param.power, function() {
+                    blast.blast(param.x, param.y, param.power, map.getEnchantMap(), function() {
                         blastGroup.removeChild(blast);
+                        clearInterval(timerId);
                     });
                 }, 3000);
             });
@@ -52,7 +53,6 @@
                 newPlayer.put(1, 1);
                 playerGroup.addChild(newPlayer);
                 otherPlayers[param.id] = newPlayer;
-                console.log('join: ' + param.id);
             });
             
             bomberman.network.setEventCallback(Constants.EVENT_LEAVE, function(param) {
