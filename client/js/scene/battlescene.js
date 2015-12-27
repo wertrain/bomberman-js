@@ -33,7 +33,7 @@
                 blocks[i] = []
                 for (var j = 0; j < map.getMapWidth(); ++j) {
                     if (mapArray[i][j] === 0) {
-                        blocks[i][j] = new bomberman.game.NormalBlock(game.assets[R.CHIP], CHIP_SIZE, CHIP_SIZE, 128, 128);
+                        blocks[i][j] = new bomberman.game.NormalBlock(game.assets[R.CHIP], CHIP_SIZE, CHIP_SIZE, 96, 32);
                         blocks[i][j].put(j, i);
                         blockGroup.addChild(blocks[i][j]);
                     } else {

@@ -13,7 +13,7 @@
         },
         put: function(x, y) {
             this.sprite.x = x * bomberman.common.CHIP_SIZE;
-            this.sprite.y = y * bomberman.common.CHIP_SIZE - 8;
+            this.sprite.y = y * bomberman.common.CHIP_SIZE;
             this.addChild(this.sprite);
         },
         remove: function() {
@@ -28,7 +28,7 @@
      */
     var NormalBlock = enchant.Class.create(BlockBase, {
         initialize: function(asset, chipWidth, chipHeight, imageWidth, imageHeight) {
-            BlockBase.call(this, asset, 0, 0, chipWidth, chipHeight, imageWidth, imageHeight);
+            BlockBase.call(this, asset, chipWidth, chipHeight, imageWidth, imageHeight);
             this.sprite.frame = 2;
         }
     });
