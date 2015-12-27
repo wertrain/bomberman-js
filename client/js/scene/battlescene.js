@@ -18,7 +18,8 @@
             var bombGroup = new enchant.Group();
             var blastGroup = new enchant.Group();
             var playerGroup = new enchant.Group();
-                        
+            var blockGroup = new enchant.Group();
+            
             var map = new bomberman.game.Map(game.assets[R.CHIP], CHIP_SIZE, CHIP_SIZE);
             var player = new bomberman.game.Player(game.assets[R.WHITE_BOMBERMAN], 16, 24, 48, 128);
             player.put(1, 1);
@@ -26,13 +27,29 @@
             
             var otherPlayers = [];
             
+            var blocks = [];
+            var mapArray = map.getMapArray();
+            for (var i = 0; i < map.getMapHeight(); ++i) {
+                blocks[i] = []
+                for (var j = 0; j < map.getMapWidth(); ++j) {
+                    if (mapArray[i][j] === 0) {
+                        blocks[i][j] = new bomberman.game.NormalBlock(game.assets[R.CHIP], CHIP_SIZE, CHIP_SIZE, 128, 128);
+                        blocks[i][j].put(j, i);
+                        blockGroup.addChild(blocks[i][j]);
+                    } else {
+                        blocks[i][j] = null;
+                    }
+                }
+            }
+            
             var stage = new enchant.Group();
             stage.addChild(map.getEnchantMap());
             stage.addChild(bombGroup);
+            stage.addChild(blockGroup);
             stage.addChild(blastGroup);
             stage.addChild(playerGroup);
             this.getEnchantScene().addChild(stage);
-                      
+            
             bomberman.network.setEventCallback(Constants.EVENT_BOMB, function(param) {
                 var bomb = new bomberman.game.NormalBomb(game.assets[R.BOMB], CHIP_SIZE, CHIP_SIZE, 48, 16);
                 bomb.put(param.x, param.y);

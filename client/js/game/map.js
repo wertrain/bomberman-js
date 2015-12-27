@@ -34,11 +34,21 @@
         initialize: function(image, width, height) {
             this.map = new enchant.Map(width, height);
             this.map.image = image;
+            this.mapArray = defaultMap;
             this.map.loadData(defaultMap, defaultMap);
             this.map.collisionData = defaultMap;
         },
         getEnchantMap: function() {
             return this.map;
+        },
+        getMapWidth: function() {
+            return this.mapArray[0].length;
+        },
+        getMapHeight: function() {
+            return this.mapArray.length;
+        },
+        getMapArray: function() {
+            return this.mapArray;
         }
     });
     
