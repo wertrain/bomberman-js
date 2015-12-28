@@ -108,7 +108,7 @@
                     buttonTrigger = false;
                 }
                 // 常に y 座標でソートしておく
-                playerGroup.childNodes.sort(function(_o0,_o1) {
+                playerGroup.childNodes.sort(function(_o0, _o1) {
                     return (_o0.sprite.y > _o1.sprite.y) ? 1 : ((_o0.sprite.y < _o1.sprite.y) ? -1 : 0);
                 });
             });
