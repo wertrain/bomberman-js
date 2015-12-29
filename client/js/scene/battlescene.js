@@ -45,7 +45,7 @@
             var stage = new enchant.Group();
             stage.addChild(map.getEnchantMap());
             stage.addChild(bombGroup);
-            stage.addChild(blockGroup);
+            //stage.addChild(blockGroup);
             stage.addChild(blastGroup);
             stage.addChild(playerGroup);
             this.getEnchantScene().addChild(stage);
