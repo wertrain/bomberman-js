@@ -18,7 +18,6 @@
             var bombGroup = new enchant.Group();
             var blastGroup = new enchant.Group();
             var playerGroup = new enchant.Group();
-            var blockGroup = new enchant.Group();
             
             var map = new bomberman.game.Map(game.assets[R.CHIP], CHIP_SIZE, CHIP_SIZE);
             var player = new bomberman.game.Player(game.assets[R.WHITE_BOMBERMAN], 16, 24, 48, 128);
@@ -27,25 +26,10 @@
             
             var otherPlayers = [];
             
-            var blocks = [];
-            var mapArray = map.getMapArray();
-            for (var i = 0; i < map.getMapHeight(); ++i) {
-                blocks[i] = []
-                for (var j = 0; j < map.getMapWidth(); ++j) {
-                    if (mapArray[i][j] === 0) {
-                        blocks[i][j] = new bomberman.game.NormalBlock(game.assets[R.CHIP], CHIP_SIZE, CHIP_SIZE, 96, 32);
-                        blocks[i][j].put(j, i);
-                        blockGroup.addChild(blocks[i][j]);
-                    } else {
-                        blocks[i][j] = null;
-                    }
-                }
-            }
-            
             var stage = new enchant.Group();
             stage.addChild(map.getEnchantMap());
+            stage.addChild(map.getBlockGroup());
             stage.addChild(bombGroup);
-            //stage.addChild(blockGroup);
             stage.addChild(blastGroup);
             stage.addChild(playerGroup);
             this.getEnchantScene().addChild(stage);
@@ -58,7 +42,7 @@
                 blastGroup.addChild(blast);
                 var timerId = setInterval(function() {
                     bombGroup.removeChild(bomb);
-                    blast.blast(param.x, param.y, param.power, map.getEnchantMap(), function() {
+                    blast.blast(param.x, param.y, param.power, map, function() {
                         blastGroup.removeChild(blast);
                         clearInterval(timerId);
                     });
@@ -89,7 +73,7 @@
             
             var buttonTrigger = false;
             this.getEnchantScene().addEventListener(enchant.Event.ENTER_FRAME, function(e) {
-                player.enterFrame(map.getEnchantMap());
+                player.enterFrame(map);
                 bomberman.network.sendEvent(Constants.EVENT_PLAYER, {
                     x: player.getPosX(), 
                     y: player.getPosY(),

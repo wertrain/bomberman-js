@@ -52,7 +52,7 @@
                     if (this.vx || this.vy) {
                         var x = this.x + (this.vx ? this.vx / Math.abs(this.vx) * bomberman.common.CHIP_SIZE : 0) + 8;
                         var y = this.y + (this.vy ? this.vy / Math.abs(this.vy) * bomberman.common.CHIP_SIZE : 0) + 8;
-                        if (0 <= x && x < map.width && 0 <= y && y < map.height && !map.hitTest(x, y)) {
+                        if (0 <= x && x < map.getEnchantMap().width && 0 <= y && y < map.getEnchantMap().height && !map.hitTest(x, y)) {
                             this.isMoving = true;
                             arguments.callee.call(this);
                         }
