@@ -95,7 +95,7 @@
                 ((x == width - 2 && y == height - 2) || (x == width - 3 && y == height - 2) || (x == width - 2 && y == height - 3) || (x == width - 2 && y == height - 4) || (x == width - 4 && y == height - 2))) {
                 return false;
             }
-            // 残りはランダムにかけさせる
+            // 残りはランダムに欠けさせる
             if (3 > Math.floor(Math.random() * 100)) {
                 return false;
             }
