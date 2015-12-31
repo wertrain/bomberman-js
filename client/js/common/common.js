@@ -38,9 +38,26 @@
         return true;
     }
     
+    /**
+     * 配列ユーティリティー
+     */
+    function extendArray(arr, num) {
+        if (arr.length === 0 || num === 0) {
+            return [];
+        }
+        var result = [];
+        for (var i = 0; i < arr.length; ++i) {
+            for (var j = 0; j < num; ++j) {
+                result.push(arr[i]);
+            }
+        }
+        return result;
+    };
+    
     var ns = addNamespace(namespace);
     ns.addNamespace = addNamespace;
     ns.addResourceArray = addResourceArray;
+    ns.extendArray = extendArray;
     ns.CHIP_SIZE = CHIP_SIZE;
     ns.MAX_BLAST_POWER = MAX_BLAST_POWER;
 }(this, "bomberman.common"));

@@ -71,13 +71,20 @@
         getMapArray: function() {
             return this.mapArray;
         },
-        hitTest: function(x, y) {
+        hitTest: function(x, y, checkObject) {
             if (this.map.hitTest(x, y)) {
                 return true;
             }
             var mx = Math.floor(x / bomberman.common.CHIP_SIZE);
             var my = Math.floor(y / bomberman.common.CHIP_SIZE);
-            return this.blocks[my][mx] !== null;
+            if(this.blocks[my][mx] !== null && false === this.blocks[my][mx].isPass()) {
+                var that = this;
+                this.blocks[my][mx].hit(checkObject, function() {
+                    that.blocks[my][mx] = null;
+                });
+                return true;
+            }
+            return false;
         },
         _isPutBlock: function(x, y, map) {
             // プレイヤー1から4の初期位置を空ける

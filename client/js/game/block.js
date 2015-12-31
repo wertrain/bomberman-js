@@ -18,6 +18,9 @@
         },
         remove: function() {
             this.removeChild(this.sprite);
+        },
+        isPass: function() {
+            return true;
         }
     });
     
@@ -27,9 +30,26 @@
      * @extends {BlockBase}
      */
     var NormalBlock = enchant.Class.create(BlockBase, {
+        _BLOCK_INDEX: 2,
         initialize: function(asset, chipWidth, chipHeight, imageWidth, imageHeight) {
             BlockBase.call(this, asset, chipWidth, chipHeight, imageWidth, imageHeight);
-            this.sprite.frame = 2;
+            this.sprite.frame = this._BLOCK_INDEX;
+            this.callback = null;
+            
+            var that = this;
+            this.sprite.addEventListener(enchant.Event.ANIMATION_END, function(e) {
+                that.remove();
+                that.callback();
+            });
+        },
+        hit: function(object, callback) {
+            if (object instanceof bomberman.game.Blast) {
+                this.sprite.frame = bomberman.common.extendArray([6, 7, 8, 9, 10, null], 2);
+                this.callback = callback;
+            }
+        },
+        isPass: function() {
+            return this.sprite.frame !== this._BLOCK_INDEX;
         }
     });
     

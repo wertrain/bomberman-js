@@ -66,7 +66,7 @@
                             offset = (j === this.power - 1) ? 3 : 4;
                          break;
                      }
-                     if (skip || (skip = map.hitTest(dx, dy))) continue;
+                     if (skip || (skip = map.hitTest(dx, dy, this))) continue;
                      this.spriteList[i][j].x = dx;
                      this.spriteList[i][j].y = dy;
                      this.spriteList[i][j].frame = [8 + offset, 16 + offset, 24 + offset, 32 + offset, 40 + offset, 32 + offset, 24 + offset, 16 + offset, 8 + offset, null];
