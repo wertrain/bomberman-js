@@ -17,10 +17,7 @@
             this.sprite.frame = [14, 22, 30, 38, 46, 38, 30, 22, 14, null];
             var that = this;
             this.sprite.addEventListener(enchant.Event.ANIMATION_END, function(e) {
-                var clength = that.childNodes.length;
-                for (var i = 0; i < clength; ++i) {
-                    that.removeChild(that.childNodes[0]);
-                }
+                that.remove();
                 that.callback();
             });
             this.spriteList = []
@@ -74,6 +71,12 @@
                  }
             }
 
+        },
+        remove: function() {
+            var clength = this.childNodes.length;
+            for (var i = 0; i < clength; ++i) {
+                this.removeChild(this.childNodes[0]);
+            }
         },
         blast: function(x, y, power, map, callback) {
             this.blastCenterX = x;

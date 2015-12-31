@@ -52,6 +52,15 @@
                     this.blocks[i][j] = block;
                 }
             }
+            
+            this.bombs = [];
+            this.bombGroup = new enchant.Group();
+            for (var i = 0; i < this.getMapHeight(); ++i) {
+                this.bombs[i] = []
+                for (var j = 0; j < this.getMapWidth(); ++j) {
+                    this.bombs[i][j] = null;
+                }
+            }
         },
         getEnchantMap: function() {
             return this.map;
@@ -61,6 +70,12 @@
         },
         getBlockGroup: function() {
             return this.blockGroup;
+        },
+        getBombs: function() {
+            return this.bombs;
+        },
+        getBombsGroup: function() {
+            return this.bombGroup;
         },
         getMapWidth: function() {
             return this.mapArray[0].length;
@@ -77,11 +92,16 @@
             }
             var mx = Math.floor(x / bomberman.common.CHIP_SIZE);
             var my = Math.floor(y / bomberman.common.CHIP_SIZE);
-            if(this.blocks[my][mx] !== null && false === this.blocks[my][mx].isPass()) {
+            if (this.blocks[my][mx] !== null && false === this.blocks[my][mx].isPass()) {
                 var that = this;
                 this.blocks[my][mx].hit(checkObject, function() {
                     that.blocks[my][mx] = null;
                 });
+                return true;
+            }
+            if (this.bombs[my][mx] !== null) {
+                var that = this;
+                this.bombs[my][mx].hit(checkObject);
                 return true;
             }
             return false;
