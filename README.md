@@ -1,5 +1,7 @@
 # bomberman-js
 
+![Screenshot](https://raw.githubusercontent.com/wertrain/bomberman-js/master/screenshot/00.png)
+
 ### Client
 
 * enchant.js
