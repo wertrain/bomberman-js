@@ -37,9 +37,6 @@
         initialize: function(asset, chipWidth, chipHeight, imageWidth, imageHeight) {
             BombBase.call(this, asset, chipWidth, chipHeight, imageWidth, imageHeight);
             this.sprite.frame = bomberman.common.extendArray([0, 1, 2, 1, 0], 3);
-        },
-        hit: function(checkObject) {
-            
         }
     });
     

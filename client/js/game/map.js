@@ -100,7 +100,6 @@
                 return true;
             }
             if (this.bombs[my][mx] !== null) {
-                var that = this;
                 this.bombs[my][mx].hit(checkObject);
                 return true;
             }
