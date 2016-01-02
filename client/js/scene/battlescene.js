@@ -36,12 +36,12 @@
             
             bomberman.network.setEventCallback(Constants.EVENT_BOMB, function(param) {
                 var bomb = new bomberman.game.NormalBomb(game.assets[R.BOMB], CHIP_SIZE, CHIP_SIZE, 48, 16);
- 
                 var timerId = null;
                 // 爆発時のコールバックを登録する
                 // このコールバックはボムクラスから呼び出される
                 var explosionCallback = function() {
                     bombGroup.removeChild(bomb);
+                    map.removeBomb(param.x, param.y);
                     var blast = new bomberman.game.Blast(game.assets[R.BOMB], CHIP_SIZE, CHIP_SIZE, 128, 128);
                     blastGroup.addChild(blast);
                     blast.blast(param.x, param.y, param.power, map, function() {
@@ -57,6 +57,7 @@
                 }, 3000);
                 
                 bomb.put(param.x, param.y, explosionCallback);
+                map.setBomb(param.x, param.y, bomb);
                 bombGroup.addChild(bomb);
             });
             
@@ -91,7 +92,7 @@
                     frame: player.getAnimFrame()
                 });
                 if (game.input.a) {
-                    if (false === buttonTrigger) {
+                    if (false === buttonTrigger && map.isPutBomb(player.getMapPosX(), player.getMapPosY())) {
                         bomberman.network.sendEvent(Constants.EVENT_BOMB, {
                             x: player.getMapPosX(), 
                             y: player.getMapPosY(), 

@@ -105,6 +105,15 @@
             }
             return false;
         },
+        setBomb: function(x, y, bomb) {
+            this.bombs[y][x] = bomb;
+        },
+        removeBomb: function(x, y) {
+            this.bombs[y][x] = null;
+        },
+        isPutBomb: function(x, y) {
+            return this.bombs[y][x] === null;
+        },
         _isPutBlock: function(x, y, map) {
             // プレイヤー1から4の初期位置を空ける
             var width = this.getMapWidth(), height = this.getMapHeight();
