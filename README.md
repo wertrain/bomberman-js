@@ -2,6 +2,8 @@
 
 ![Screenshot](https://raw.githubusercontent.com/wertrain/bomberman-js/master/screenshot/00.png)
 
+[http://bomberman-clone.herokuapp.com/](http://bomberman-clone.herokuapp.com/)
+
 ### Client
 
 * enchant.js
