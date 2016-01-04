@@ -63,6 +63,7 @@
             
             bomberman.network.setEventCallback(Constants.EVENT_JOIN, function(param) {
                 var newPlayer = new bomberman.game.Player(game.assets[R.WHITE_BOMBERMAN], 16, 24, 48, 128);
+                newPlayer.put(1, 1);
                 newPlayer.setInfo(param);
                 playerGroup.addChild(newPlayer);
                 otherPlayers[param.id] = newPlayer;
