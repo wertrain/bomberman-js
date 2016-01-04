@@ -2,9 +2,9 @@
  * @fileoverview socket.io に関する実装。
  */
 (function(namespace) {
-    var socketio = io.connect('http://localhost:8080');
-    //var port = 8080;
-    //var socketio = io.connect('/', { port: port });
+    var port = 8080;
+    var host = location.origin;
+    var socketio = io.connect(host, {port: port, transports: ["websocket"]});
     
     // if 判定が不要なようにすべてのコールバックを埋めておく
     var events = [];
