@@ -11,7 +11,8 @@
     var io = require('socket.io').listen(server);
     var constants = require('./constants.js').Constants;
 
-    var allPlayers = []
+    var allPlayers = [];
+    var allBombs = [];
     io.sockets.on('connection', function (socket) {
         socket.on(constants.EVENT_CONNECTED, function (param) {
             var msg = '(' + socket.id + ')' + 'が入室しました ';
